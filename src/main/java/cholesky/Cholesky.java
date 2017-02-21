@@ -8,6 +8,6 @@ public class Cholesky {
     }
 
     public Matrix loese(Matrix a, Matrix b) {
-        return a;
+        return b;
     }
 }

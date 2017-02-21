@@ -4,6 +4,7 @@ package main.java.cholesky;
  * Created by phillip.goellner on 21.02.2017.
  */
 class Cholesky {
+  
     private Matrix calculateCholeskyMatrix(Matrix A){
         if(A.breite()!=A.hoehe()){
             throw new CholeskyException();
@@ -29,6 +30,7 @@ class Cholesky {
         }
         return result;
     }
+  
     public Cholesky() {
     }
 

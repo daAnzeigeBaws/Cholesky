@@ -45,16 +45,6 @@ class Matrix {
         this.zeilen = zeilen;
         this.spalten = spalten;
         feld=new double[zeilen][spalten];
-        for(int aktuelleZeile=0;aktuelleZeile<zeilen;aktuelleZeile++){
-            for(int aktuelleSpalte=0;aktuelleSpalte<=aktuelleZeile;aktuelleSpalte++){
-                if(aktuelleZeile==aktuelleSpalte){
-                    setElement(aktuelleZeile,aktuelleSpalte, 1);
-                }else{
-                    setElement(aktuelleZeile,aktuelleSpalte,0);
-                    setElement(aktuelleSpalte,aktuelleZeile,0);
-                }
-            }
-        }
     }
 
     public void setElement(int zeile, int spalte, double wert) {
@@ -113,7 +103,7 @@ class Matrix {
         Matrix result=new Matrix(this.spalten,this.zeilen);
         for(int aktuelleZeile=0;aktuelleZeile<zeilen;aktuelleZeile++){
             for(int aktuelleSpalte=0;aktuelleSpalte<spalten;aktuelleSpalte++){
-                result.setElement(aktuelleSpalte,aktuelleZeile,feld[aktuelleZeile][aktuelleSpalte]);
+                result.setElement(aktuelleSpalte,aktuelleZeile,getElement(aktuelleZeile,aktuelleSpalte));
             }
         }
         return result;

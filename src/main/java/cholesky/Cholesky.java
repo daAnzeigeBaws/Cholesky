@@ -5,7 +5,7 @@ package main.java.cholesky;
  */
 class Cholesky {
   
-    public Matrix calculateCholeskyMatrix(Matrix A){
+    private Matrix calculateCholeskyMatrix(Matrix A){
         if(A.breite()!=A.hoehe()){
             throw new CholeskyException();
         }
@@ -34,12 +34,43 @@ class Cholesky {
 
         return A;
     }
+
+    private Matrix solveForZ(Matrix cholesky, Matrix b){
+        Matrix z=new Matrix(b.hoehe(),1);
+        z.setElement(0,0,b.getElement(0,0)/cholesky.getElement(0,0));
+        for(int line=1;line<z.hoehe();line++){
+            double value=b.getElement(line,0);
+            for(int k=0;k<line;k++){
+                value-=z.getElement(k,0)*cholesky.getElement(line,k);
+            }
+            value/= cholesky.getElement(line,line);
+            z.setElement(line,0,value);
+        }
+        return z;
+    }
+
+    private Matrix solveForX(Matrix choleskyT, Matrix z){
+        Matrix x=new Matrix(z.hoehe(),1);
+        x.setElement(x.hoehe()-1,0,z.getElement(z.hoehe()-1,0)/choleskyT.getElement(z.hoehe()-1,z.hoehe()-1));
+        for(int line=x.hoehe()-2;line>=0;line--){
+            double value = z.getElement(line,0);
+            for(int k=x.hoehe()-1;k>line;k--){
+                value-=x.getElement(k,0)*choleskyT.getElement(line,k);
+            }
+            value/=choleskyT.getElement(line,line);
+            x.setElement(line,0,value);
+        }
+        return x;
+    }
   
     public Cholesky() {
     }
 
-    public Matrix loese(Matrix a, Matrix b) {
+    public Matrix loese(Matrix A, Matrix b) {
+        Matrix cholesky = calculateCholeskyMatrix(A);
+        Matrix result= solveForZ(cholesky,b);
 
-        return b;
+        result=solveForX(cholesky.transponierte(),result);
+        return result;
     }
 }

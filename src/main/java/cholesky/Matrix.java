@@ -38,11 +38,19 @@ class Matrix {
     }
 
     public double[] zeile(int _zeile) {
-        return null;
+        double[] result = new double[spalten];
+        for(int aktuelleSpalte=0;aktuelleSpalte<spalten;aktuelleSpalte++){
+            result[aktuelleSpalte]=getElement(_zeile,aktuelleSpalte);
+        }
+        return result;
     }
 
     public double[] spalte(int _spalte) {
-        return null;
+        double[] result = new double[zeilen];
+        for(int aktuelleZeile=0;aktuelleZeile<spalten;aktuelleZeile++){
+            result[aktuelleZeile]=getElement(aktuelleZeile,_spalte);
+        }
+        return result;
     }
 
     public int hoehe() {

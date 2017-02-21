@@ -3,18 +3,28 @@ package main.java.cholesky;
 /**
  * Created by phillip.goellner on 21.02.2017.
  */
-public class Matrix {
+
+class Matrix {
+
+    private int zeilen;
+    private int spalten;
+
+    private double[][] feld;
+
     public Matrix(String dateiname) {
     }
 
     public Matrix(int zeilen, int spalten) {
+        this.zeilen = zeilen;
+        this.spalten = spalten;
     }
 
     public void setElement(int zeile, int spalte, double wert) {
+        feld[zeile][spalte] = wert;
     }
 
     public double getElement(int zeile, int spalte) {
-        return 0.0;
+        return feld[zeile][spalte];
     }
 
     public double[] zeile(int _zeile) {
@@ -26,11 +36,11 @@ public class Matrix {
     }
 
     public int hoehe() {
-        return 0;
+        return zeilen;
     }
 
     public int breite() {
-        return 0;
+        return spalten;
     }
 
     public String toString() {

@@ -17,6 +17,16 @@ class Matrix {
     public Matrix(int zeilen, int spalten) {
         this.zeilen = zeilen;
         this.spalten = spalten;
+        for(int aktuelleZeile=0;aktuelleZeile<zeilen;aktuelleZeile++){
+            for(int aktuelleSpalte=0;aktuelleSpalte<=aktuelleZeile;aktuelleSpalte++){
+                if(aktuelleZeile==aktuelleSpalte){
+                    setElement(aktuelleZeile,aktuelleSpalte, 1);
+                }else{
+                    setElement(aktuelleZeile,aktuelleSpalte,0);
+                    setElement(aktuelleSpalte,aktuelleZeile,0);
+                }
+            }
+        }
     }
 
     public void setElement(int zeile, int spalte, double wert) {
@@ -50,7 +60,14 @@ class Matrix {
     public void toFile(String dateiname) {
     }
 
-    public Matrix transponiere() {
-        return this;
+    public Matrix transponierte() {
+        Matrix result=new Matrix(this.zeilen,this.spalten);
+        for(int aktuelleZeile=0;aktuelleZeile<zeilen;aktuelleZeile++){
+            for(int aktuelleSpalte=0;aktuelleSpalte<spalten;aktuelleSpalte++){
+                result.setElement(aktuelleZeile,aktuelleSpalte,feld[aktuelleZeile][aktuelleSpalte]);
+                result.setElement(aktuelleSpalte,aktuelleZeile,feld[aktuelleSpalte][aktuelleZeile]);
+            }
+        }
+        return result;
     }
 }

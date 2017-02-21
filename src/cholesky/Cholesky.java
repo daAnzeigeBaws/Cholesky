@@ -1,4 +1,4 @@
-package main.java.cholesky;
+package cholesky;
 
 /**
  * Created by phillip.goellner on 21.02.2017.

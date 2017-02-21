@@ -34,9 +34,9 @@ class Matrix {
             }
         });
 
-        for (int i = 0; i < feld[0].length; i++) {
-            for (int j = 0; j < feld.length; j++) {
-                feld[j][i] = values.pop();
+        for (int i = 0; i < zeilen; i++) {
+            for (int j = 0; j < spalten; j++) {
+                feld[i][j] = values.pop();
             }
         }
     }
@@ -44,7 +44,7 @@ class Matrix {
     public Matrix(int zeilen, int spalten) {
         this.zeilen = zeilen;
         this.spalten = spalten;
-      
+        feld=new double[zeilen][spalten];
         for(int aktuelleZeile=0;aktuelleZeile<zeilen;aktuelleZeile++){
             for(int aktuelleSpalte=0;aktuelleSpalte<=aktuelleZeile;aktuelleSpalte++){
                 if(aktuelleZeile==aktuelleSpalte){
@@ -91,11 +91,11 @@ class Matrix {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < feld[0].length; i++) {
-            for (int j = 0; j < feld.length - 1; j++) {
-                sb.append(feld[j][i]).append(' ');
+        for (int i = 0; i < zeilen; i++) {
+            for (int j = 0; j < spalten-1; j++) {
+                sb.append(feld[i][j]).append(' ');
             }
-            sb.append(feld[feld.length - 1][i]).append('\n');
+            sb.append(getElement(i,spalten-1)).append('\n');
         }
         return sb.toString();
     }
@@ -110,11 +110,10 @@ class Matrix {
     }
 
     public Matrix transponierte() {
-        Matrix result=new Matrix(this.zeilen,this.spalten);
+        Matrix result=new Matrix(this.spalten,this.zeilen);
         for(int aktuelleZeile=0;aktuelleZeile<zeilen;aktuelleZeile++){
             for(int aktuelleSpalte=0;aktuelleSpalte<spalten;aktuelleSpalte++){
-                result.setElement(aktuelleZeile,aktuelleSpalte,feld[aktuelleZeile][aktuelleSpalte]);
-                result.setElement(aktuelleSpalte,aktuelleZeile,feld[aktuelleSpalte][aktuelleZeile]);
+                result.setElement(aktuelleSpalte,aktuelleZeile,feld[aktuelleZeile][aktuelleSpalte]);
             }
         }
         return result;

@@ -5,36 +5,41 @@ package main.java.cholesky;
  */
 class Cholesky {
   
-    private Matrix calculateCholeskyMatrix(Matrix A){
+    public Matrix calculateCholeskyMatrix(Matrix A){
         if(A.breite()!=A.hoehe()){
             throw new CholeskyException();
         }
 
-        Matrix result = new Matrix(A.hoehe(),A.breite());
-
         for(int currentLine=0;currentLine<A.hoehe();currentLine++){
-            for(int currentColumn=0;currentColumn<currentLine;currentColumn++){
+            for(int currentColumn=0;currentColumn<=currentLine;currentColumn++){
                 double currentElement=A.getElement(currentLine,currentColumn);
-                for(int k=0;k<currentColumn-1;k++){
+                for(int k=0;k<=currentColumn-1;k++){
                     currentElement-=A.getElement(currentLine,k)*A.getElement(currentColumn,k);
                 }
 
                 if(currentLine>currentColumn){
-                    result.setElement(currentLine,currentColumn,currentElement/A.getElement(currentColumn,currentColumn));
+                    A.setElement(currentLine,currentColumn,currentElement/A.getElement(currentColumn,currentColumn));
                 } else if(currentElement>0){
-                    result.setElement(currentLine,currentLine,Math.sqrt(currentElement));
+                    A.setElement(currentLine,currentLine,Math.sqrt(currentElement));
                 } else{
                     throw new CholeskyException();
                 }
             }
         }
-        return result;
+        for(int line=0;line<A.hoehe()-1;line++){
+            for(int column=line+1;column<A.breite();column++){
+                A.setElement(line,column,0);
+            }
+        }
+
+        return A;
     }
   
     public Cholesky() {
     }
 
     public Matrix loese(Matrix a, Matrix b) {
+
         return b;
     }
 }

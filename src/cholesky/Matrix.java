@@ -16,9 +16,9 @@ class Matrix {
     private int spalten;
 
     private double[][] feld;
-  
+
     public Matrix(String dateiname) throws IOException {
-        LinkedList<Double> values = new LinkedList();
+        LinkedList<Double> values = new LinkedList<>();
         List<String> ss = Files.readAllLines(Paths.get(dateiname));
 
         String[] _tokens = ss.get(0).split(" ");
@@ -44,7 +44,7 @@ class Matrix {
     public Matrix(int zeilen, int spalten) {
         this.zeilen = zeilen;
         this.spalten = spalten;
-        feld=new double[zeilen][spalten];
+        feld = new double[zeilen][spalten];
     }
 
     public void setElement(int zeile, int spalte, double wert) {
@@ -57,16 +57,16 @@ class Matrix {
 
     public double[] zeile(int _zeile) {
         double[] result = new double[spalten];
-        for(int aktuelleSpalte=0;aktuelleSpalte<spalten;aktuelleSpalte++){
-            result[aktuelleSpalte]=getElement(_zeile,aktuelleSpalte);
+        for (int aktuelleSpalte = 0; aktuelleSpalte < spalten; aktuelleSpalte++) {
+            result[aktuelleSpalte] = getElement(_zeile, aktuelleSpalte);
         }
         return result;
     }
 
     public double[] spalte(int _spalte) {
         double[] result = new double[zeilen];
-        for(int aktuelleZeile=0;aktuelleZeile<spalten;aktuelleZeile++){
-            result[aktuelleZeile]=getElement(aktuelleZeile,_spalte);
+        for (int aktuelleZeile = 0; aktuelleZeile < spalten; aktuelleZeile++) {
+            result[aktuelleZeile] = getElement(aktuelleZeile, _spalte);
         }
         return result;
     }
@@ -82,10 +82,10 @@ class Matrix {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < zeilen; i++) {
-            for (int j = 0; j < spalten-1; j++) {
+            for (int j = 0; j < spalten - 1; j++) {
                 sb.append(feld[i][j]).append(' ');
             }
-            sb.append(getElement(i,spalten-1)).append('\n');
+            sb.append(getElement(i, spalten - 1)).append('\n');
         }
         return sb.toString();
     }
@@ -100,10 +100,10 @@ class Matrix {
     }
 
     public Matrix transponierte() {
-        Matrix result=new Matrix(this.spalten,this.zeilen);
-        for(int aktuelleZeile=0;aktuelleZeile<zeilen;aktuelleZeile++){
-            for(int aktuelleSpalte=0;aktuelleSpalte<spalten;aktuelleSpalte++){
-                result.setElement(aktuelleSpalte,aktuelleZeile,getElement(aktuelleZeile,aktuelleSpalte));
+        Matrix result = new Matrix(this.spalten, this.zeilen);
+        for (int aktuelleZeile = 0; aktuelleZeile < zeilen; aktuelleZeile++) {
+            for (int aktuelleSpalte = 0; aktuelleSpalte < spalten; aktuelleSpalte++) {
+                result.setElement(aktuelleSpalte, aktuelleZeile, getElement(aktuelleZeile, aktuelleSpalte));
             }
         }
         return result;

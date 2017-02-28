@@ -6,6 +6,6 @@ if errorlevel 1 (
     echo "Please insert JAVA_HOME to your Path"
 )
 cd src
-jar -fc cholesky.jar cholesky/Cholesky.class cholesky/CholeskyException.class cholesky/Matrix.class
+jar -fMc cholesky.jar cholesky/Cholesky.class cholesky/CholeskyException.class cholesky/Matrix.class
 del /S *.class
 move /Y cholesky.jar ../cholesky.jar

@@ -13,7 +13,6 @@ public class CholeskyTest {
     public void loese() throws Exception {
         Cholesky cholesky = new Cholesky();
 
-
         String basePath = "testdata/GS";
         String testingLog = "Testing GS ";
         String expectedLog = "Expected result is: ";

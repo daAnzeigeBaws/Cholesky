@@ -17,27 +17,31 @@ public class Matrix {
 
     private double[][] feld;
 
-    public Matrix(String dateiname) throws IOException {
-        LinkedList<Double> values = new LinkedList<>();
-        List<String> ss = Files.readAllLines(Paths.get(dateiname));
+    public Matrix(String dateiname) {
+        try {
+            LinkedList<Double> values = new LinkedList<>();
+            List<String> ss = Files.readAllLines(Paths.get(dateiname));
 
-        String[] _tokens = ss.get(0).split(" ");
-        zeilen = Integer.parseInt(_tokens[0]);
-        spalten = Integer.parseInt(_tokens[1]);
+            String[] _tokens = ss.get(0).split(" ");
+            zeilen = Integer.parseInt(_tokens[0]);
+            spalten = Integer.parseInt(_tokens[1]);
 
-        feld = new double[zeilen][spalten];
+            feld = new double[zeilen][spalten];
 
-        Files.readAllLines(Paths.get(dateiname)).subList(1, ss.size()).forEach(line -> {
-            String[] tokens = line.split(" ");
-            for (String value : tokens) {
-                values.add(Double.parseDouble(value));
+            Files.readAllLines(Paths.get(dateiname)).subList(1, ss.size()).forEach(line -> {
+                String[] tokens = line.split(" ");
+                for (String value : tokens) {
+                    values.add(Double.parseDouble(value));
+                }
+            });
+
+            for (int i = 0; i < zeilen; i++) {
+                for (int j = 0; j < spalten; j++) {
+                    feld[i][j] = values.pop();
+                }
             }
-        });
-
-        for (int i = 0; i < zeilen; i++) {
-            for (int j = 0; j < spalten; j++) {
-                feld[i][j] = values.pop();
-            }
+        } catch (IOException e) {
+            throw new CholeskyException("Fehler beim Einlesen!");
         }
     }
 

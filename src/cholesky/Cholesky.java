@@ -4,25 +4,37 @@ package cholesky;
  * Created by phillip.goellner on 21.02.2017.
  */
 class Cholesky {
-  
+    private boolean isSymmetrical(Matrix matrix){
+        for(int line=1;line<matrix.hoehe();line++){
+            for(int column=0;column<line;column++){
+                if(matrix.getElement(line,column)!=matrix.getElement(column,line)){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
     private Matrix calculateCholeskyMatrix(Matrix A){
         if(A.breite()!=A.hoehe()){
-            throw new CholeskyException();
+            throw new CholeskyException("Matrix is not square");
         }
-
+        if(!isSymmetrical(A)){
+            throw new CholeskyException("Matrix is not symmetrical!");
+        }
         for(int currentLine=0;currentLine<A.hoehe();currentLine++){
             for(int currentColumn=0;currentColumn<=currentLine;currentColumn++){
                 double currentElement=A.getElement(currentLine,currentColumn);
                 for(int k=0;k<=currentColumn-1;k++){
                     currentElement-=A.getElement(currentLine,k)*A.getElement(currentColumn,k);
                 }
-
                 if(currentLine>currentColumn){
                     A.setElement(currentLine,currentColumn,currentElement/A.getElement(currentColumn,currentColumn));
+                    System.out.println(A);
                 } else if(currentElement>0){
                     A.setElement(currentLine,currentLine,Math.sqrt(currentElement));
+                    System.out.println(A);
                 } else{
-                    throw new CholeskyException();
+                    throw new CholeskyException("Matrix is not positive definite");
                 }
             }
         }

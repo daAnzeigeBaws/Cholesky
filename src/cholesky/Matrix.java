@@ -10,7 +10,7 @@ import java.util.List;
  * Created by phillip.goellner on 21.02.2017.
  */
 
-class Matrix {
+public class Matrix {
 
     private int zeilen;
     private int spalten;

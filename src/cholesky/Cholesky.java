@@ -3,7 +3,7 @@ package cholesky;
 /**
  * Created by phillip.goellner on 21.02.2017.
  */
-class Cholesky {
+public class Cholesky {
     private boolean isSymmetrical(Matrix matrix){
         for(int line=1;line<matrix.hoehe();line++){
             for(int column=0;column<line;column++){
@@ -29,10 +29,8 @@ class Cholesky {
                 }
                 if(currentLine>currentColumn){
                     A.setElement(currentLine,currentColumn,currentElement/A.getElement(currentColumn,currentColumn));
-                    System.out.println(A);
                 } else if(currentElement>0){
                     A.setElement(currentLine,currentLine,Math.sqrt(currentElement));
-                    System.out.println(A);
                 } else{
                     throw new CholeskyException("Matrix is not positive definite");
                 }

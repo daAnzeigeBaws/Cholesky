@@ -109,27 +109,26 @@ public class Matrix {
         return result;
     }
 
-    public boolean equals(Object o){
-        if(!(o instanceof Matrix)){
+    public boolean equals(Object o) {
+        if (!(o instanceof Matrix)) {
             return false;
         }
         Matrix compareWith = (Matrix) o;
-        if(compareWith.hoehe()!=this.hoehe()||this.breite()>1||compareWith.breite()>1){
+        if (compareWith.hoehe() != this.hoehe() || this.breite() > 1 || compareWith.breite() > 1) {
             return false;
         }
 
-        double result=0;
+        double result = 0;
 
-        for(int line=0;line<this.hoehe();line++){
-            result+=Math.pow(this.getElement(line,0)-compareWith.getElement(line,0),2);
+        for (int line = 0; line < this.hoehe(); line++) {
+            result += Math.pow(this.getElement(line, 0) - compareWith.getElement(line, 0), 2);
         }
 
-        result=Math.sqrt(result);
-        if(result<=0.0001){
+        result = Math.sqrt(result);
+        if (result <= 0.0001) {
             return true;
         }
         return false;
-
 
 
     }

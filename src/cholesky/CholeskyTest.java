@@ -39,7 +39,7 @@ public class CholeskyTest {
 
         try {
             calculated_x = cholesky.loese(a, b);
-            assertEquals(x, calculated_x);
+            assertTrue(equals(x, calculated_x));
             testLog.append(yieldLog)
                     .append(equal);
         } catch (CholeskyException e) {
@@ -63,7 +63,7 @@ public class CholeskyTest {
 
         try {
             calculated_x = cholesky.loese(a, b);
-            assertEquals(x, calculated_x);
+            assertTrue(equals(x, calculated_x));
             testLog.append(yieldLog)
                     .append(equal);
         } catch (CholeskyException e) {
@@ -87,7 +87,7 @@ public class CholeskyTest {
 
         try {
             calculated_x = cholesky.loese(a, b);
-            assertEquals(x, calculated_x);
+            assertTrue(equals(x, calculated_x));
             testLog.append(yieldLog)
                     .append(equal);
         } catch (CholeskyException e) {
@@ -111,7 +111,7 @@ public class CholeskyTest {
 
         try {
             calculated_x = cholesky.loese(a, b);
-            assertEquals(x, calculated_x);
+            assertTrue(equals(x, calculated_x));
             testLog.append(yieldLog)
                     .append(equal);
         } catch (CholeskyException e) {
@@ -135,7 +135,7 @@ public class CholeskyTest {
 
         try {
             calculated_x = cholesky.loese(a, b);
-            assertEquals(x, calculated_x);
+            assertTrue(equals(x, calculated_x));
             testLog.append(yieldLog)
                     .append(equal);
         } catch (CholeskyException e) {
@@ -159,7 +159,7 @@ public class CholeskyTest {
 
         try {
             calculated_x = cholesky.loese(a, b);
-            assertEquals(x, calculated_x);
+            assertTrue(equals(x, calculated_x));
             testLog.append(yieldLog)
                     .append(equal);
         } catch (CholeskyException e) {
@@ -183,7 +183,7 @@ public class CholeskyTest {
 
         try {
             calculated_x = cholesky.loese(a, b);
-            assertEquals(x, calculated_x);
+            assertTrue(equals(x, calculated_x));
             testLog.append(yieldLog)
                     .append(equal);
         } catch (CholeskyException e) {
@@ -250,7 +250,7 @@ public class CholeskyTest {
 
         try {
             calculated_x = cholesky.loese(a, b);
-            assertNotEquals(x, calculated_x);
+            assertFalse(equals(x, calculated_x));
             testLog.append(yieldLog)
                     .append(notEqual);
         } catch (CholeskyException e) {
@@ -266,4 +266,19 @@ public class CholeskyTest {
         Files.write(Paths.get("test.log"), testLog.toString().getBytes());
     }
 
+    private boolean equals(Matrix a, Matrix b) {
+        if (a.hoehe() != b.hoehe() || b.breite() > 1 || a.breite() > 1) {
+            return false;
+        }
+        double result = 0;
+
+        for (int line = 1; line < b.hoehe() + 1; line++) {
+            result += Math.pow(b.getElement(line, 1) - a.getElement(line, 1), 2);
+        }
+        result = Math.sqrt(result);
+        if (result <= 0.0001) {
+            return true;
+        }
+        return false;
+    }
 }

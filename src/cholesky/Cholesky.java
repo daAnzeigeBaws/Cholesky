@@ -3,7 +3,7 @@ package cholesky;
 /**
  * Created by phillip.goellner on 21.02.2017.
  */
-class Cholesky {
+public class Cholesky {
     private boolean isSymmetrical(Matrix matrix){
         for(int line=2;line<=matrix.hoehe();line++){
             for(int column=1;column<=line;column++){

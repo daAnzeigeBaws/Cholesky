@@ -48,17 +48,17 @@ class Matrix {
     }
 
     public void setElement(int zeile, int spalte, double wert) {
-        feld[zeile][spalte] = wert;
+        feld[zeile-1][spalte-1] = wert;
     }
 
     public double getElement(int zeile, int spalte) {
-        return feld[zeile][spalte];
+        return feld[zeile-1][spalte-1];
     }
 
     public double[] zeile(int _zeile) {
         double[] result = new double[spalten];
         for (int aktuelleSpalte = 0; aktuelleSpalte < spalten; aktuelleSpalte++) {
-            result[aktuelleSpalte] = getElement(_zeile, aktuelleSpalte);
+            result[aktuelleSpalte] = getElement(_zeile, aktuelleSpalte+1);
         }
         return result;
     }
@@ -66,7 +66,7 @@ class Matrix {
     public double[] spalte(int _spalte) {
         double[] result = new double[zeilen];
         for (int aktuelleZeile = 0; aktuelleZeile < spalten; aktuelleZeile++) {
-            result[aktuelleZeile] = getElement(aktuelleZeile, _spalte);
+            result[aktuelleZeile] = getElement(aktuelleZeile+1, _spalte);
         }
         return result;
     }
@@ -81,11 +81,11 @@ class Matrix {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < zeilen; i++) {
-            for (int j = 0; j < spalten - 1; j++) {
-                sb.append(feld[i][j]).append(' ');
+        for (int i = 1; i <= zeilen; i++) {
+            for (int j = 1; j < spalten ; j++) {
+                sb.append(getElement(i,j)).append(' ');
             }
-            sb.append(getElement(i, spalten - 1)).append('\n');
+            sb.append(getElement(i, spalten )).append('\n');
         }
         return sb.toString();
     }
@@ -101,8 +101,8 @@ class Matrix {
 
     public Matrix transponierte() {
         Matrix result = new Matrix(this.spalten, this.zeilen);
-        for (int aktuelleZeile = 0; aktuelleZeile < zeilen; aktuelleZeile++) {
-            for (int aktuelleSpalte = 0; aktuelleSpalte < spalten; aktuelleSpalte++) {
+        for (int aktuelleZeile = 1; aktuelleZeile <= zeilen; aktuelleZeile++) {
+            for (int aktuelleSpalte = 1; aktuelleSpalte <= spalten; aktuelleSpalte++) {
                 result.setElement(aktuelleSpalte, aktuelleZeile, getElement(aktuelleZeile, aktuelleSpalte));
             }
         }
